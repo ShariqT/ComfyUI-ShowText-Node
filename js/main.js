@@ -82,18 +82,24 @@ S.registerExtension({
     
     const updateDisplay = () => {
       const textWidget = e.widgets?.find(w => w.name === "text_input");
-      if (textWidget) {
-        displayText = textWidget.value || "";
+      if (textWidget && textWidget.value) {
+        displayText = textWidget.value;
         e.setDirtyCanvas(true, true);
+      } else {
+        const textInput = e.inputs?.find(i => i.name === "text_input");
+        if (textInput && textInput.value !== undefined) {
+          displayText = String(textInput.value);
+          e.setDirtyCanvas(true, true);
+        }
       }
     };
     
-    setTimeout(updateDisplay, 100);
+    setTimeout(updateDisplay, 500);
     
     const originalOnConnect = e.onConnectInput;
     e.onConnectInput = function(...args) {
       const result = originalOnConnect ? originalOnConnect.apply(this, args) : undefined;
-      setTimeout(updateDisplay, 100);
+      setTimeout(updateDisplay, 500);
       return result;
     };
     
@@ -101,6 +107,26 @@ S.registerExtension({
     e.onExecute = function(...args) {
       const result = originalOnExecute ? originalOnExecute.apply(this, args) : undefined;
       updateDisplay();
+      return result;
+    };
+    
+    const originalOnPropertyChanged = e.onPropertyChanged;
+    e.onPropertyChanged = function(property, value) {
+      const result = originalOnPropertyChanged ? originalOnPropertyChanged.apply(this, arguments) : undefined;
+      if (property === "text_input") {
+        displayText = String(value || "");
+        e.setDirtyCanvas(true, true);
+      }
+      return result;
+    };
+    
+    const originalSetValue = e.setValue;
+    e.setValue = function(value, slot) {
+      const result = originalSetValue ? originalSetValue.apply(this, arguments) : undefined;
+      if (slot === 0 || slot === "text_input") {
+        displayText = String(value || "");
+        e.setDirtyCanvas(true, true);
+      }
       return result;
     };
   }

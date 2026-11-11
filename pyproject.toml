@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "showmetext"
-version = "0.0.3"
+version = "0.0.4"
 description = "This is a simple node that shows text"
 authors = [
   {name = "Shariq Torres", email = "shariq.torres@gmail.com"}
