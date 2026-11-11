@@ -9,7 +9,7 @@ class ComfyUIFEExampleVueBasic:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "text_input": ("STRING", {"multiline": True}),
+                "text_input": ("STRING", {"multiline": True, "forceInput": True}),
             },
         }
 
