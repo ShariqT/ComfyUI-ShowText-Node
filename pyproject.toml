@@ -14,7 +14,7 @@ license = {text = "GNU General Public License v3"}
 requires-python = ">=3.10"
 classifiers = []
 dependencies = [
-
+    "comfyui-frontend-package>=1.24.1"
 ]
 
 
@@ -30,17 +30,17 @@ dev = [
 ]
 
 [project.urls]
-Repository = "https://github.com/ShariqT/showmetext"
-BugTracker = "https://github.com/ShariqT/showmetext/issues"
-Documentation = "https://github.com/ShariqT/showmetext/wiki"
+Repository = "https://github.com/ShariqT/ComfyUI-ShowText-Node"
+BugTracker = "https://github.com/ShariqT/ComfyUI-ShowText-Node/issues"
+Documentation = "https://github.com/ShariqT/ComfyUI-ShowText-Node/README"
 
 
 [tool.comfy]
-PublisherId = "ShariqT"
-DisplayName = "ShowMeText"
+PublisherId = "shariqtorres"
+DisplayName = "Show Me Text"
 Icon = ""
 Tags = []
-Repository = "https://github.com/ShariqT/showmetext"
+Repository = "https://github.com/ShariqT/ComfyUI-ShowText-Node"
 includes = ["js"]
 
 [tool.setuptools.package-data]

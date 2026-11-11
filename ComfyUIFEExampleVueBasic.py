@@ -18,7 +18,7 @@ class ComfyUIFEExampleVueBasic:
 
     FUNCTION = "run"
 
-    CATEGORY = "examples"
+    CATEGORY = "text"
 
     def run(self, text_input):
         # Simply return the input text
@@ -29,5 +29,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "show-text": "Show Text"
+    "show-text": "Show Me Text"
 }

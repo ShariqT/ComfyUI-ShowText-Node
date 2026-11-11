@@ -66,7 +66,7 @@ Install via the ComfyUI Registry (if available).
 ### Adding the Node
 
 1. Right-click in the ComfyUI canvas
-2. Navigate to **examples > Show Text**
+2. Navigate to **text > Show Me Text**
 3. Click to add the node to your workflow
 
 ### Node Inputs
