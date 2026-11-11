@@ -63,5 +63,45 @@ S.registerExtension({
     if (e.constructor.comfyClass !== "show-text") return;
     const [o, t] = e.size;
     e.setSize([Math.max(o, 350), Math.max(t, 400)]);
+    
+    const originalDraw = e.onDrawForeground || function() {};
+    let displayText = "";
+    
+    e.onDrawForeground = function(ctx) {
+      originalDraw.call(this, ctx);
+      
+      if (displayText) {
+        ctx.save();
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(displayText, this.size[0] / 2, 30);
+        ctx.restore();
+      }
+    };
+    
+    const updateDisplay = () => {
+      const textWidget = e.widgets?.find(w => w.name === "text_input");
+      if (textWidget) {
+        displayText = textWidget.value || "";
+        e.setDirtyCanvas(true, true);
+      }
+    };
+    
+    setTimeout(updateDisplay, 100);
+    
+    const originalOnConnect = e.onConnectInput;
+    e.onConnectInput = function(...args) {
+      const result = originalOnConnect ? originalOnConnect.apply(this, args) : undefined;
+      setTimeout(updateDisplay, 100);
+      return result;
+    };
+    
+    const originalOnExecute = e.onExecute;
+    e.onExecute = function(...args) {
+      const result = originalOnExecute ? originalOnExecute.apply(this, args) : undefined;
+      updateDisplay();
+      return result;
+    };
   }
 });
